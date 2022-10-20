@@ -33,18 +33,48 @@
     color: white;
 }
 
+
+
+a{
+    text-decoration: none;
+}
+
 .menu{
-    display: flex;
+    display: flex;    
+}
+.sheme{
+    width: 40%;
+}
+.attendance{
+    width: 60%;
+}
+.attendance table thead td{
     
+    height: 50px;
+    vertical-align: bottom;
+}
+.attendance table tbody td{
+    height: 50px;
+}
+.sheme td{
+    vertical-align: top;  
+}
+.menu .attendance span{
+    font-size: 50%;
+    font-weight: bold;
+    background-color: #6b90da;
+    padding: 3px;
+    border-radius: 2px;
+    color: antiquewhite;
 }
 
-.menu-left{
-    flex-grow: 1;
+.span{
+    font-size: 50%;
+    font-weight: bold;
+    background-color: #5cb85c;
+    padding: 3px;
+    border-radius: 2px;
+    color: antiquewhite;
 }
 
-.menu-mid{
-    flex-grow: 2;
-}
-.menu-right{
-    flex-grow: 4    ;
-}
+
