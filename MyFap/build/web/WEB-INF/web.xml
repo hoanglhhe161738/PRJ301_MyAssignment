@@ -4,9 +4,17 @@
         <servlet-name>TimeTableController</servlet-name>
         <servlet-class>Controller.TimeTableController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GroupController</servlet-name>
+        <servlet-class>Controller.GroupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableController</servlet-name>
         <url-pattern>/TimeTableController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupController</servlet-name>
+        <url-pattern>/GroupController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

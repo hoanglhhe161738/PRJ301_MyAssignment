@@ -16,9 +16,9 @@ public class Session {
     private Room room;
     private Lecturer lec;
     private Date date;
-    private boolean status;
+    
     private Slot slot;
-
+    
     public int getSesId() {
         return sesId;
     }
@@ -59,13 +59,6 @@ public class Session {
         this.date = date;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
 
     public Slot getSlot() {
         return slot;

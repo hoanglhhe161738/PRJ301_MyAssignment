@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import dal.AttendanceDBcontext;
+import dal.LectureDBcontext;
 import dal.SessionDBcontext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import model.Attendance;
 import model.Room;
 import model.Session;
 import unity.DateTimeTool;
@@ -33,8 +36,9 @@ public class TimeTableController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int stid;
-        stid = Integer.parseInt(request.getParameter("stid"));
+        int id;
+        id = Integer.parseInt(request.getParameter("id"));
+        
         String raw_from = request.getParameter("from");
         String raw_to = request.getParameter("to");
         java.sql.Date from = null;
@@ -50,29 +54,45 @@ public class TimeTableController extends HttpServlet {
             from = java.sql.Date.valueOf(raw_from);
             to = java.sql.Date.valueOf(raw_to);
         }
-       ArrayList<Integer> slot = new ArrayList<>();
+        ArrayList<Integer> slot = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             slot.add(i);
         }
-        request.setAttribute("slot", slot);
-       request.setAttribute("from", from);
-       request.setAttribute("to", to);
-       request.setAttribute("dates", DateTimeTool.getDateList(from, to));
+       request.getSession().setAttribute("slot", slot);
+       request.getSession().setAttribute("from", from);
+       request.getSession().setAttribute("to", to);
+       request.getSession().setAttribute("dates", DateTimeTool.getDateList(from, to));
        
        SessionDBcontext sb = new SessionDBcontext();
-       ArrayList<Session> sessions = sb.getListSession(stid, from, to);
-       request.setAttribute("sessions", sessions);
-//        for (Session session : sessions) {
-//            response.getWriter().println(session.getSesId());
-//            response.getWriter().println(session.getGroup().getGname());
-//            
-//        }
+       ArrayList<Session> sessions = sb.getListSessionStudent(id, from, to);
+       AttendanceDBcontext adb = new AttendanceDBcontext();
        
-//       response.getWriter().println(stid);
+       ArrayList<Attendance> list = new ArrayList<>();
+       request.getSession().setAttribute("sessions", sessions);
+        int count = 0;
+       
+        for (Session session : sessions) {
+            Attendance a = new Attendance();
+            a.setSessions(session);
+            boolean b = adb.Attendance(id, session.getSesId());
+            a.setAttendance(b);
+            list.add(a);      
+            count ++;
+            //response.getWriter().println("ses " +session.getSesId());
+        }
+        request.getSession().setAttribute("count", count);
+//        for (Attendance attendance : list) {
+//            response.getWriter().println("att ses " + attendance.getSessions().getSesId());
+//            response.getWriter().println(attendance.isAttendance());
+//        }
+        request.getSession().setAttribute("Attandance", list);
+////       
+      //response.getWriter().println(id);
 //       response.getWriter().println(from);
 //       response.getWriter().println(to);
        
-       request.getRequestDispatcher("/Fap/Sheme.jsp").forward(request, response);
+       request.getRequestDispatcher("/Fap/Student/Sheme.jsp").forward(request, response);
+       //response.sendRedirect("../Fap/Sheme.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

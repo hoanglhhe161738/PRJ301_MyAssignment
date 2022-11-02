@@ -12,27 +12,33 @@ import java.util.ArrayList;
  * @author Hoàng
  */
 public class Attendance {
-    private ArrayList<Session> sessions = new ArrayList<>();
-    private ArrayList<Student> students = new ArrayList<>();
+    private Session sessions;
+    private Student students;
     private boolean attendance;
     private String description;
     private Date recordTime;
 
-    public ArrayList<Session> getSessions() {
+    public Attendance() {
+        
+    }
+   
+    public Session getSessions() {
         return sessions;
     }
 
-    public void setSessions(ArrayList<Session> sessions) {
+    public void setSessions(Session sessions) {
         this.sessions = sessions;
     }
 
-    public ArrayList<Student> getStudents() {
+    public Student getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(Student students) {
         this.students = students;
     }
+
+   
 
     public boolean isAttendance() {
         return attendance;
@@ -57,6 +63,9 @@ public class Attendance {
     public void setRecordTime(Date recordTime) {
         this.recordTime = recordTime;
     }
+
+    
+
     
     
 }
