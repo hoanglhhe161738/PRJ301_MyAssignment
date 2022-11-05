@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-        <title>Document</title>
+        <title>Weekly Timetable</title>
         <style>
             *{
                 box-sizing: border-box;
@@ -178,6 +178,7 @@
                     border-left:0.2px solid rgb(227, 219, 219);">${d}</td>
             </c:forEach>
         </tr>
+        <c:set value="0" var="cnt"/>
         <c:forEach items="${sessionScope.slot}" var="sl">
             <tr style="border-left: 2px solid black;">
                 <td style="text-align: left;
@@ -187,40 +188,40 @@
                     <td style="border-left:0.2px solid rgb(227, 219, 219);
                         border-bottom:0.2px solid rgb(227, 219, 219);">
                         <c:forEach items="${sessionScope.sessions}" var="ses">
-                            <c:choose>
-                                <c:when test="${helper.compare(ses.date,d) eq 0 and ses.slot.slid eq sl}">
-                                    <a style="text-decoration: none;" href="http://localhost:8080/MyFap/GroupController?sesid=${ses.sesId}" >${ses.group.gname}-</a><a class="view" style="font-size: 75%;
-                                                                                                                                                                        text-decoration: none;
-                                                                                                                                                                        background-color: #f0ad4e;
-                                                                                                                                                                        padding: 2px;
-                                                                                                                                                                        color: white;
-                                                                                                                                                                        border-radius: 2px;" href="">${ses.lec.lname}</a>
-                                    <br> at ${ses.room.roomName} <br>
-                                    <c:set var="count" value="0"  />
-                                    <c:forEach items="${sessionScope.Attandance}" var="a">
-                                        <c:set var="count" value="${count + 1}"  />
-                                        <label for=""><c:choose>
-                                                <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq true}">Attended</c:when>
-                                                <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq false and count == 0}">
-                                                    absent
-                                                </c:when>
-                                            </c:choose></label ></c:forEach> <br> <label class="uncolor" style="font-size: 75%;
-                                            text-decoration: none;
-                                            background-color: #5cb85c;
-                                            padding: 2px;
-                                            color: white;
-                                                                              border-radius: 2px;" for="">${ses.slot.start} - ${ses.slot.end}</label>
+                            <c:set value="${cnt + 1}" var="cnt"/>
+                            <c:if test="${helper.compare(ses.date,d) eq 0 and ses.slot.slid eq sl}">
+                                <a style="text-decoration: none;" href="http://localhost:8080/MyFap/GroupController?sesid=${ses.sesId}" >${ses.group.gname}-</a><a class="view" style="font-size: 75%;
+                                                                                                                                                                   text-decoration: none;
+                                                                                                                                                                   background-color: #f0ad4e;
+                                                                                                                                                                   padding: 2px;
+                                                                                                                                                                   color: white;
+                                                                                                                                                                   border-radius: 2px;" href="">${ses.lec.lname}</a>
+                                <br> at ${ses.room.roomName} <br>
+                                <c:set var="count" value="0"  />
+                                <c:forEach items="${sessionScope.Attandance}" var="a">
+                                    <c:set var="count" value="${count + 1}"  />
+                                    <label for=""><c:choose>
+                                            <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq true}">Attended</c:when>
+                                            <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq false}">
+                                                absent
+                                            </c:when>
+                                        </c:choose></label ></c:forEach> <br> <label class="uncolor" style="font-size: 75%;
+                                        text-decoration: none;
+                                        background-color: #5cb85c;
+                                        padding: 2px;
+                                        color: white;
+                                                                          border-radius: 2px;" for="">${ses.slot.start} - ${ses.slot.end}</label>
 
-                                </c:when>
-                                <c:otherwise>
-
-                                </c:otherwise>
-                            </c:choose> 
+                            </c:if>
+                            
 
                         </c:forEach>
                     </td>
+                    <c:if test="${cnt eq sessionScope.count}">
 
-                </c:forEach>
+                    </c:if>
+
+                </c:forEach>    
             </tr>
         </c:forEach>
 

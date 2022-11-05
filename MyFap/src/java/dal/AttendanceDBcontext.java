@@ -33,10 +33,11 @@ public class AttendanceDBcontext extends DBcontext<Attendance> {
             a = rs.getBoolean("attandance");
             //sSystem.out.println("attendance" + a);
             }
+            return a;
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return a;
+        return null;
     }
 
     @Override

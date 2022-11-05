@@ -8,6 +8,22 @@
         <servlet-name>GroupController</servlet-name>
         <servlet-class>Controller.GroupController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LecturerController</servlet-name>
+        <servlet-class>Controller.LecturerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupLecturerController</servlet-name>
+        <servlet-class>Controller.GroupLecturerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LecturerGroupController</servlet-name>
+        <servlet-class>Controller.LecturerGroupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaticAttendanceController</servlet-name>
+        <servlet-class>Controller.StaticAttendanceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableController</servlet-name>
         <url-pattern>/TimeTableController</url-pattern>
@@ -15,6 +31,22 @@
     <servlet-mapping>
         <servlet-name>GroupController</servlet-name>
         <url-pattern>/GroupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturerController</servlet-name>
+        <url-pattern>/LecturerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupLecturerController</servlet-name>
+        <url-pattern>/GroupLecturerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturerGroupController</servlet-name>
+        <url-pattern>/LecturerGroupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaticAttendanceController</servlet-name>
+        <url-pattern>/StaticAttendanceController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

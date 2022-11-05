@@ -99,4 +99,11 @@ public class DateTimeTool {
         //System.out.println(a + " " + b +" " +e_a.compareTo(e_b));
         return e_a.compareTo(e_b);
     }
+    
+    public static int compareDate(java.sql.Date a){
+        java.util.Date raw_b = java.util.Calendar.getInstance().getTime();
+        java.util.Date b = removeTime(raw_b);
+        
+        return a.compareTo(b);
+    }
 }

@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styleAttendance.css">
-        <title>Attended</title>
+        <title>Group Member List</title>
         <style>
             img{
                 width: 90px;
@@ -50,12 +50,15 @@
                     <td>Record Time</td>
                 </tr>
             </thead>
+            <c:set value="0" var="count" />
             <c:forEach items="${sessionScope.listStudent}" var="lst">
+                <c:set value="${count+1}" var="count" />
                 <tr style="border-bottom: 2px solid black;">
 
 
-
-                    <td>${count}</td>
+                    
+                    <td><c:out value="${count}"/></td>
+                   
                     <td>${lst.sessions.group.gname}</td>
                     <td>${lst.students.id}</td>
                     <td>${lst.students.name}</td>
@@ -72,7 +75,9 @@
 
 
                 </tr>
+                
             </c:forEach>
+                
         </table>
     </body>
 </html>

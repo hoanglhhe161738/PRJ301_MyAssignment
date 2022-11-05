@@ -12,18 +12,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import model.Attendance;
-import model.Room;
 import model.Session;
 import unity.DateTimeTool;
+
 
 /**
  *
  * @author Hoàng
  */
-public class TimeTableController extends HttpServlet {
+public class LecturerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +37,7 @@ public class TimeTableController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id;
+             int id;
         id = Integer.parseInt(request.getParameter("id"));
         
         String raw_from = request.getParameter("from");
@@ -63,8 +64,8 @@ public class TimeTableController extends HttpServlet {
        request.getSession().setAttribute("to", to);
        request.getSession().setAttribute("dates", DateTimeTool.getDateList(from, to));
        
-       SessionDBcontext sb = new SessionDBcontext();
-       ArrayList<Session> sessions = sb.getListSessionStudent(id, from, to);
+       LectureDBcontext ldb = new LectureDBcontext();
+       ArrayList<Session> sessions = ldb.getListSessionLecturer(id, from, to);
        AttendanceDBcontext adb = new AttendanceDBcontext();
        
        ArrayList<Attendance> list = new ArrayList<>();
@@ -87,12 +88,11 @@ public class TimeTableController extends HttpServlet {
 //        }
         request.getSession().setAttribute("Attandance", list);
 ////       
-//       response.getWriter().println(id);
+//      //response.getWriter().println(id);
 //       response.getWriter().println(from);
 //       response.getWriter().println(to);
-//       
-       request.getRequestDispatcher("/Fap/Student/Sheme.jsp").forward(request, response);
-       //response.sendRedirect("../Fap/Sheme.jsp");
+       
+       request.getRequestDispatcher("/Fap/Lecturer/LectureSheme.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

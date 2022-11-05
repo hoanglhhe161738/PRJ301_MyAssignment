@@ -16,8 +16,19 @@ public class Session {
     private Room room;
     private Lecturer lec;
     private Date date;
+    private Boolean att;
     
     private Slot slot;
+
+    public Boolean getAtt() {
+        return att;
+    }
+
+    public void setAtt(Boolean att) {
+        this.att = att;
+    }
+
+    
     
     public int getSesId() {
         return sesId;

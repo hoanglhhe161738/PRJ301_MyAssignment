@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styleAttendance.css">
-        <title>Group Member List</title>
+        <title>Take Attendance</title>
         <style>
             img{
                 width: 90px;
@@ -50,34 +50,33 @@
                     <td>Record Time</td>
                 </tr>
             </thead>
-            <c:set value="0" var="count" />
+             <c:set value="0" var="count" />
             <c:forEach items="${sessionScope.listStudent}" var="lst">
-                <c:set value="${count+1}" var="count" />
+                 <c:set value="${count+1}" var="count" />
                 <tr style="border-bottom: 2px solid black;">
 
 
-                    
+
                     <td><c:out value="${count}"/></td>
-                   
                     <td>${lst.sessions.group.gname}</td>
                     <td>${lst.students.id}</td>
                     <td>${lst.students.name}</td>
                     <td><img style="width: 90px;
                              height: 120px; "src="https://i.pinimg.com/originals/42/9b/17/429b171accad8b42f906e43b35c3b341.jpg" alt=""></td>
                     <td style="font-size: 10px;">
-                        <c:if test="${lst.attendance eq true}">Attended</c:if>
-                        <c:if test="${lst.attendance eq false}">Absent</c:if>
-                        </td>
-                        <td>${lst.description}</td>
+                    <td style="font-size: 10px;">Present<input  style="font-size: 1px;" type="radio" name="${lst.students.name}" value="1">
+                        absent<input type="radio" name="${lst.students.name}" value="0">
+                        <input type="submit" value="save">
+                    </td>
+                    </td>
+                    <td>${lst.description}</td>
                     <td>${lst.sessions.lec.lname}</td>
                     <td>${lst.recordTime}</td>
 
 
 
                 </tr>
-                
             </c:forEach>
-                
         </table>
     </body>
 </html>
