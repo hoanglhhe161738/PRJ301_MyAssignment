@@ -15,15 +15,17 @@ public class Account {
     private String username;
     private String password;
     private String displayName;
-    private ArrayList<Role> roles = new ArrayList<>();
+    private Role roles = new Role();
 
-    public ArrayList<Role> getRoles() {
+    public Role getRoles() {
         return roles;
     }
 
-    public void setRoles(ArrayList<Role> roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
     }
+
+   
     
     
     public int getAccid() {

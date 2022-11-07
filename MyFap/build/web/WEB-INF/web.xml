@@ -2,15 +2,15 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>TimeTableController</servlet-name>
-        <servlet-class>Controller.TimeTableController</servlet-class>
+        <servlet-class>Student.TimeTableController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GroupController</servlet-name>
-        <servlet-class>Controller.GroupController</servlet-class>
+        <servlet-class>Student.GroupController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LecturerController</servlet-name>
-        <servlet-class>Controller.LecturerController</servlet-class>
+        <servlet-class>Lecturer.LecturerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GroupLecturerController</servlet-name>
@@ -18,11 +18,23 @@
     </servlet>
     <servlet>
         <servlet-name>LecturerGroupController</servlet-name>
-        <servlet-class>Controller.LecturerGroupController</servlet-class>
+        <servlet-class>Lecturer.LecturerGroupController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StaticAttendanceController</servlet-name>
-        <servlet-class>Controller.StaticAttendanceController</servlet-class>
+        <servlet-class>Student.StaticAttendanceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewController</servlet-name>
+        <servlet-class>Controller.ViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupListController</servlet-name>
+        <servlet-class>Student.GroupListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupControllerList</servlet-name>
+        <servlet-class>Student.GroupControllerList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableController</servlet-name>
@@ -47,6 +59,18 @@
     <servlet-mapping>
         <servlet-name>StaticAttendanceController</servlet-name>
         <url-pattern>/StaticAttendanceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewController</servlet-name>
+        <url-pattern>/ViewController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupListController</servlet-name>
+        <url-pattern>/GroupListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupControllerList</servlet-name>
+        <url-pattern>/GroupControllerList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

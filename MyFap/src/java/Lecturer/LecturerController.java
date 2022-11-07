@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Lecturer;
 
 import dal.AttendanceDBcontext;
-import dal.SesDBcontext;
+import dal.LectureDBcontext;
 import dal.SessionDBcontext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -19,11 +19,12 @@ import model.Attendance;
 import model.Session;
 import unity.DateTimeTool;
 
+
 /**
  *
  * @author Hoàng
  */
-public class StaticAttendanceController extends HttpServlet {
+public class LecturerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,39 +37,62 @@ public class StaticAttendanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        int gid = Integer.parseInt(request.getParameter("gid"));
+             int id;
+        id = Integer.parseInt(request.getParameter("id"));
+        
+        String raw_from = request.getParameter("from");
+        String raw_to = request.getParameter("to");
+        java.sql.Date from = null;
+        java.sql.Date to = null;
+        if (raw_from == null || raw_from.length() == 0) {
+            Date today = new Date();
+            int todayOfWeek = DateTimeTool.getDayofWeek(today);
+            Date e_from = DateTimeTool.addDays(today, 2 - todayOfWeek);
+            Date e_to = DateTimeTool.addDays(today, 8 - todayOfWeek);
+            from = DateTimeTool.toDateSql(e_from);
+            to = DateTimeTool.toDateSql(e_to);
+        } else {
+            from = java.sql.Date.valueOf(raw_from);
+            to = java.sql.Date.valueOf(raw_to);
+        }
         ArrayList<Integer> slot = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             slot.add(i);
         }
-        request.getSession().setAttribute("slot", slot);
-        SesDBcontext sb = new SesDBcontext();
-        ArrayList<Session> sessions = sb.getSession(id, gid);
-        AttendanceDBcontext adb = new AttendanceDBcontext();
-
-        ArrayList<Attendance> list = new ArrayList<>();
-
+       request.getSession().setAttribute("slot", slot);
+       request.getSession().setAttribute("from", from);
+       request.getSession().setAttribute("to", to);
+       request.getSession().setAttribute("dates", DateTimeTool.getDateList(from, to));
+       
+       LectureDBcontext ldb = new LectureDBcontext();
+       ArrayList<Session> sessions = ldb.getListSessionLecturer(id, from, to);
+       AttendanceDBcontext adb = new AttendanceDBcontext();
+       
+       ArrayList<Attendance> list = new ArrayList<>();
+       request.getSession().setAttribute("sessions", sessions);
         int count = 0;
-
+       
         for (Session session : sessions) {
             Attendance a = new Attendance();
             a.setSessions(session);
             boolean b = adb.Attendance(id, session.getSesId());
             a.setAttendance(b);
-            session.setAtt(b);
-            list.add(a);
-            count++;
+            list.add(a);      
+            count ++;
             //response.getWriter().println("ses " +session.getSesId());
-            //response.getWriter().println("slot name " +session.getSlot().getSlname());
-            //response.getWriter().println("att" + b);
         }
-        //response.getWriter().println(id +" " + gid);
         request.getSession().setAttribute("count", count);
-        request.getSession().setAttribute("sessions", sessions);
+//        for (Attendance attendance : list) {
+//            response.getWriter().println("att ses " + attendance.getSessions().getSesId());
+//            response.getWriter().println(attendance.isAttendance());
+//        }
         request.getSession().setAttribute("Attandance", list);
-
-        request.getRequestDispatcher("/Fap/Student/AttandanceStatic.jsp").forward(request, response);
+////       
+//      //response.getWriter().println(id);
+//       response.getWriter().println(from);
+//       response.getWriter().println(to);
+       
+       request.getRequestDispatcher("/Fap/Lecturer/LectureSheme.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

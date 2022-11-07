@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Lecturer;
 
 import dal.StudentDBcontext;
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ import model.Attendance;
  *
  * @author Hoàng
  */
-public class GroupController extends HttpServlet {
+public class LecturerGroupController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,12 +33,11 @@ public class GroupController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int sesid = Integer.parseInt(request.getParameter("sesid"));
+        
         StudentDBcontext sdb = new StudentDBcontext();
         ArrayList<Attendance> listStudent = sdb.getListStudent(sesid);
-        
         request.getSession().setAttribute("listStudent", listStudent);
-        
-        request.getRequestDispatcher("/Fap/Student/Group.jsp").forward(request, response);
+        request.getRequestDispatcher("/Fap/Lecturer/LectureAttendance.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

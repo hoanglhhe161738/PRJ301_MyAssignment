@@ -72,6 +72,7 @@
             }
             .attendance table tbody td{
                 height: 50px;
+                
             }
             .sheme td{
                 vertical-align: top;
@@ -95,7 +96,11 @@
             }
 
 
-
+            .attendance td{
+                border-left:0.2px solid rgb(227, 219, 219);
+                border-bottom:0.2px solid rgb(227, 219, 219);
+                text-align: center
+            }
         </style>
         <title>Attendance Report</title>
     </head>
@@ -236,7 +241,7 @@
                         <c:forEach items="${sessionScope.sessions}" var="ses">
                             <c:set value="${count+1}" var="count" />
                             <tr>
-                                <td><c:out value="${count}"/></td>
+                                <td style="padding-left: -37px"><c:out value="${count}"/></td>
                                 <td><span>${helper.getDayNameofWeek(ses.date)} ${ses.date} </span></td>
                                 <td><label class="span">${ses.slot.slname}_(${ses.slot.start}-${ses.slot.end})</label></td>
                                 <td>${ses.room.roomName}</td>
@@ -250,116 +255,20 @@
                                         <c:set value="${absent+1}" var="absent"/>
                                     </c:if>
                                     <c:if test="${ses.att eq false and helper.compareDate(ses.date) ne -1}">-</c:if>
-                                </td>
-                                <td></td>
-                            </tr>
+                                    </td>
+                                    <td></td>
+                                </tr>
                         </c:forEach>
-                        <tr>
-                            <td>Total: <c:out value="${attended + absent}"/> Slot ABSENT: <c:out value="${attended/(attended + absent)*100}"/>%</td>
-                        </tr>
+
                     </tbody>
                 </table>
+                <tr style="border:0.2px solid rgb(227, 219, 219);">
+                    Total: <c:out value="${attended + absent}"/> Slot ABSENT: <c:out value="${attended/(attended + absent)*100}" />%
+                </tr>
             </div>
         </div>
 
-        <!-- <div class="menu">
-            <div class="menu-left">
-                CAMPUS/PROGRAM <br>
-                FUF-HL
-            </div>
-            <div class="menu-mid"> 
-                TERM <br>
-                    <a href="">Summer2017</a><br>
-                    <a href="">Fall2017</a><br>
-                    <a href="">Spring2018</a><br>
-                    <a href="">Summer2018</a><br>
-                    <a href="">Fall2018</a><br>
-                    <a href="">Spring2019</a><br>
-                    <a href="">Summer2019</a><br>
-                    <a href="">Fall2019</a><br>
-                    <a href="">Spring2020</a><br>
-                    <a href="">Summer2020</a><br>
-                    <a href="">Fall2020</a><br>
-                    <a href="">Spring2021</a><br>
-                    <a href="">Summer2021</a><br>
-                    <a href="">Fall2021</a><br>
-                    <a href="">Spring2022</a><br>
-                    <a href="">Summer2022</a><br>
-                    <a href="">Fall2022</a>
-            </div>
-            <div menu-mid1>
-                COURSE<br>
-                Statistics and Probability(MAS291)(SE1643,start 05/09/2022)<br>
-                Java Web Application Development(PRJ301)(SE1643,start 05/09/2022)<br>
-                Elementary Japanese 1-A1.2(JPD123)(SE1643,start 06/09/2022)<br>
-                Introduction to Software Engineering(SWE201c)(SE1639,start 17/09/2022)<br>
-                Internet of Things(IOT102)(SE1643,start 10/10/2022)<br>
-                Java Web Application<br>
-                Java Web Application<br>
-            </div>
-            <div class="menu-right">
-                <tr>
-                    <td>NO.</td>
-                    <td>DATE</td>
-                    <td>SLOT</td>
-                    <td>ROOM</td>
-                    <td>LECTURER</td>
-                    <td>GROUP NAME</td>
-                    <td>ATTENDANCE STATUS</td>
-                    <td>LECTURER'S</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </div>
-        </div> -->
+        
     </body>
 
 </html>

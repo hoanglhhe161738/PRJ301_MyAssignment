@@ -4,22 +4,23 @@
  */
 package Controller;
 
-import dal.StudentDBcontext;
+import dal.AccountDBcontext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import model.Attendance;
+import model.Account;
+import model.Lecturer;
+import model.Student;
 
 
 /**
  *
  * @author Hoàng
  */
-public class LecturerGroupController extends HttpServlet {
+public class ViewController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +33,33 @@ public class LecturerGroupController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sesid = Integer.parseInt(request.getParameter("sesid"));
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        AccountDBcontext adb = new AccountDBcontext();
+        Account a = adb.getAccount(username, password);
         
-        StudentDBcontext sdb = new StudentDBcontext();
-        ArrayList<Attendance> listStudent = sdb.getListStudent(sesid);
-        request.getSession().setAttribute("listStudent", listStudent);
-        request.getRequestDispatcher("/Fap/Lecturer/LectureAttendance.jsp").forward(request, response);
+        if(a == null){
+ //       response.getWriter().println("login successfull");
+            
+            request.getRequestDispatcher("/Fap/Home/Login.jsp").forward(request, response);
+        }
+        else if(a != null)
+        { 
+            if(a.getRoles().getName().equalsIgnoreCase("lecturer")){
+                Lecturer l = adb.getAccountLecturer(a);
+                request.getSession().setAttribute("account", a);
+                request.getSession().setAttribute("lecturer", l);
+                request.getRequestDispatcher("/Fap/Lecturer/Home.jsp").forward(request, response);
+            }
+            if(a.getRoles().getName().equalsIgnoreCase("student")){
+                Student s = adb.getAccountStudent(a);
+                //response.getWriter().println(a.getUsername());
+                request.getSession().setAttribute("student", s);
+                request.getSession().setAttribute("account", a);
+                request.getRequestDispatcher("Fap/Student/Home.jsp").forward(request, response);
+            }
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

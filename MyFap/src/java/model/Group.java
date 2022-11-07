@@ -17,7 +17,7 @@ public class Group {
     private Lecturer lecturer;
     private String sem;
     private String year;
-    private ArrayList<Student> students = new ArrayList<>();
+    private Student students;
 
     public int getGid() {
         return gid;
@@ -66,5 +66,14 @@ public class Group {
     public void setYear(String year) {
         this.year = year;
     }
-    
+
+    public Student getStudents() {
+        return students;
+    }
+
+    public void setStudents(Student students) {
+        this.students = students;
+    }
+
+  
 }
