@@ -39,7 +39,7 @@ public class ViewController extends HttpServlet {
         Account a = adb.getAccount(username, password);
         
         if(a == null){
- //       response.getWriter().println("login successfull");
+//          response.getWriter().println("login successfull");
             
             request.getRequestDispatcher("/Fap/Home/Login.jsp").forward(request, response);
         }

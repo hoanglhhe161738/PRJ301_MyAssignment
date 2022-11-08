@@ -110,8 +110,7 @@
              height: 10%;">
             <ol style="padding-left: 10px;">
                 <li style="list-style: none;">
-                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"
-                                                      href="../Student.aspx">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
+                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
                 </li>
             </ol>
             <div>
@@ -121,29 +120,24 @@
                    border-radius: 2px;
                    background-color:#5cb85c;
                    color: white;" href="?view=user">
-                    <span id="ctl00_lblLogIn" class="label label-success">hoanglhhe161738</span></a> | <a
-                    style="text-decoration: none;" href="?logout=true" class="label label-success">logout</a> |
-                <span style="font-size: 12px;
-                      background-color: #5cb85c;
-                      color: white;
-                      padding: 2px;
-                      border-radius: 2px;" id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa L?c</span>
+                    <span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.displayName}</span></a> | <a
+                    style="text-decoration: none;" href="?logout=true" class="label label-success">logout</a>
             </div>
         </div>
 
         <div>
-            <h2> <span> Activities for HoangLhhe161738 (Ly Hai Hoang) </span></h2>
+            <h2> <span> Activities for ${sessionScope.account.displayName}</span></h2>
             <p>Note: These activities do not include extra-curriculum activities, such as club activities ...
                 <br>
-                Chú thích: Các hoạt ??ng trong b?ng d??i không bao g?m ho?t ??ng ngo?i khóa, ví d? nh? ho?t ??ng câu l?c b?
+                Chú thích: Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa, ví dụ như hoạt động câu lạc bộ 
                 ...
                 <br>
-                Các phòng b?t ??u b?ng AL thu?c tòa nhà Alpha. VD: AL... <br>
-                Các phòng b?t ??u b?ng BE thu?c tòa nhà Beta. VD: BE,.. <br>
-                Các phòng b?t ??u b?ng G thu?c tòa nhà Gamma. VD: G201,... <br>
-                Các phòng t?p b?ng ??u b?ng R thu?c khu v?c sân t?p Vovinam. <br>
-                Các phòng b?t ??u b?ng DE thu?c tòa nhà Delta. VD: DE,.. <br>
-                Little UK (LUK) thu?c t?ng 5 tòa nhà Delta
+                Các phòng bắt đầu bằng AL thuộc tòa nhà Alpha. VD: AL...<br>
+                Các phòng bắt đầu bằng BE thuộc tòa nhà Beta. VD: BE,..<br>
+                Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
+                Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
+                Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br>
+                Little UK (LUK) thuộc tầng 5 tòa nhà Delta
             </p> <br>
         </div>
         <table>
@@ -178,7 +172,7 @@
                     border-left:0.2px solid rgb(227, 219, 219);">${d}</td>
             </c:forEach>
         </tr>
-        <c:set value="0" var="cnt"/>
+
         <c:forEach items="${sessionScope.slot}" var="sl">
             <tr style="border-left: 2px solid black;">
                 <td style="text-align: left;
@@ -188,7 +182,7 @@
                     <td style="border-left:0.2px solid rgb(227, 219, 219);
                         border-bottom:0.2px solid rgb(227, 219, 219);">
                         <c:forEach items="${sessionScope.sessions}" var="ses">
-                            <c:set value="${cnt + 1}" var="cnt"/>
+
                             <c:if test="${helper.compare(ses.date,d) eq 0 and ses.slot.slid eq sl}">
                                 <a style="text-decoration: none;" href="http://localhost:8080/MyFap/GroupController?sesid=${ses.sesId}" >${ses.group.gname}-</a><a class="view" style="font-size: 75%;
                                                                                                                                                                    text-decoration: none;
@@ -197,9 +191,9 @@
                                                                                                                                                                    color: white;
                                                                                                                                                                    border-radius: 2px;" href="">${ses.lec.lname}</a>
                                 <br> at ${ses.room.roomName} <br>
-                                <c:set var="count" value="0"  />
+
                                 <c:forEach items="${sessionScope.Attandance}" var="a">
-                                    <c:set var="count" value="${count + 1}"  />
+
                                     <label for=""><c:choose>
                                             <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq true}">Attended</c:when>
                                             <c:when test="${a.sessions.sesId eq ses.sesId and a.attendance eq false}">
@@ -213,13 +207,11 @@
                                                                           border-radius: 2px;" for="">${ses.slot.start} - ${ses.slot.end}</label>
 
                             </c:if>
-                            
+
 
                         </c:forEach>
                     </td>
-                    <c:if test="${cnt eq sessionScope.count}">
 
-                    </c:if>
 
                 </c:forEach>    
             </tr>

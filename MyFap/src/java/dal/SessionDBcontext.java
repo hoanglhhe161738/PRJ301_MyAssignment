@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Attendance;
 import model.Group;
 import model.Lecturer;
 import model.Room;
@@ -48,7 +49,7 @@ public class SessionDBcontext extends DBcontext<Session> {
                 Group g = new Group();
                 Lecturer l = new Lecturer();
                 Slot sl = new Slot();
-                
+
                 r.setRoomName(rs.getString("Room"));
                 s.setRoom(r);
 
@@ -93,7 +94,7 @@ public class SessionDBcontext extends DBcontext<Session> {
 
     @Override
     public void update(Session model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override

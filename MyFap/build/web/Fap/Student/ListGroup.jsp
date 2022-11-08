@@ -16,7 +16,7 @@
         <form action="/MyFap/GroupControllerList" method="post">
         
             <select name="gr">
-            <c:forEach  items="${sessionScope.groups}" var="g">
+                <c:forEach  items="${sessionScope.groups}" var="g">
                 <option value="${g.gname}">${g.gname}</option>
             </c:forEach>
         </select>
@@ -42,6 +42,6 @@
                 </c:forEach>
             </tbody>
         </table>
-
+<a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>
     </body>
 </html>

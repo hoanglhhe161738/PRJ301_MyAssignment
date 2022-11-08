@@ -75,23 +75,15 @@ public class LecturerController extends HttpServlet {
         for (Session session : sessions) {
             Attendance a = new Attendance();
             a.setSessions(session);
-            boolean b = adb.Attendance(id, session.getSesId());
+            a = adb.Attendance(id, session.getSesId());
+            boolean b = a.isAttendance();
             a.setAttendance(b);
             list.add(a);      
             count ++;
             //response.getWriter().println("ses " +session.getSesId());
         }
         request.getSession().setAttribute("count", count);
-//        for (Attendance attendance : list) {
-//            response.getWriter().println("att ses " + attendance.getSessions().getSesId());
-//            response.getWriter().println(attendance.isAttendance());
-//        }
-        request.getSession().setAttribute("Attandance", list);
-////       
-//      //response.getWriter().println(id);
-//       response.getWriter().println(from);
-//       response.getWriter().println(to);
-       
+        request.getSession().setAttribute("Attandance", list);    
        request.getRequestDispatcher("/Fap/Lecturer/LectureSheme.jsp").forward(request, response);
     }
 

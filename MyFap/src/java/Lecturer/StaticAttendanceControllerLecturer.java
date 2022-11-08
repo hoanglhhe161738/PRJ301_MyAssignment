@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Student;
+package Lecturer;
 
 import dal.AttendanceDBcontext;
-import dal.StudentDBcontext;
+import dal.SesDBcontext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.Attendance;
+import model.Session;
 
 
 /**
  *
  * @author Hoàng
  */
-public class GroupController extends HttpServlet {
+public class StaticAttendanceControllerLecturer extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +34,39 @@ public class GroupController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sesid = Integer.parseInt(request.getParameter("sesid"));
-        StudentDBcontext sdb = new StudentDBcontext();
-        ArrayList<Attendance> listStudent = sdb.getListStudent(sesid);
-        
-        request.getSession().setAttribute("listStudent", listStudent);
-        
-        request.getRequestDispatcher("/Fap/Student/Group.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        int gid = Integer.parseInt(request.getParameter("gid"));
+        ArrayList<Integer> slot = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            slot.add(i);
+        }
+        request.getSession().setAttribute("slot", slot);
+        SesDBcontext sb = new SesDBcontext();
+        ArrayList<Session> sessions = sb.getSession(id, gid);
+        AttendanceDBcontext adb = new AttendanceDBcontext();
+
+        ArrayList<Attendance> list = new ArrayList<>();
+
+        int count = 0;
+
+        for (Session session : sessions) {
+            Attendance a =  adb.Attendance(id, session.getSesId());
+            a.setSessions(session);
+            boolean b = a.isAttendance();
+            a.setAttendance(b);
+            session.setAtt(b);
+            list.add(a);
+            count++;
+            //response.getWriter().println("ses " +session.getSesId());
+            //response.getWriter().println("slot name " +session.getSlot().getSlname());
+            //response.getWriter().println("att" + b);
+        }
+        //response.getWriter().println(id +" " + gid);
+        request.getSession().setAttribute("count", count);
+        request.getSession().setAttribute("sessions", sessions);
+        request.getSession().setAttribute("Attandance", list);
+
+        request.getRequestDispatcher("/Fap/Lecturer/AttandanceStatic.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,25 +95,7 @@ public class GroupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AttendanceDBcontext adb = new AttendanceDBcontext();
-        
-        ArrayList<Attendance> listStudent = (ArrayList<Attendance>) request.getSession().getAttribute("listStudent");
-        for (Attendance attendance : listStudent) {
-            int stid = attendance.getStudents().getId();
-            int sesid = attendance.getSessions().getSesId();
-            
-            String name = attendance.getStudents().getName();
-            String id = String.valueOf(attendance.getStudents().getId());
-            String comment = request.getParameter(id);
-            String a = request.getParameter(name);
-            boolean b = false;
-            if(a.equals("1")){
-                b = true;
-            }
-            
-            adb.update(attendance, sesid, stid, b, comment);
-        }
-        response.sendRedirect("/MyFap/Fap/Lecturer/Home.jsp");
+        processRequest(request, response);
     }
 
     /**

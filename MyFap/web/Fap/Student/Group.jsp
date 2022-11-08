@@ -79,5 +79,6 @@
             </c:forEach>
                 
         </table>
+            <a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>
     </body>
 </html>

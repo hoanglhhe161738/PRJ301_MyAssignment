@@ -15,6 +15,7 @@ import model.Lecturer;
 import model.Room;
 import model.Session;
 import model.Slot;
+import model.Student;
 
 /**
  *
@@ -25,7 +26,7 @@ public class SesDBcontext extends DBcontext<Session>{
     public ArrayList<Session> getSession(int stid, int gid){
         ArrayList<Session> sessions = new ArrayList<>();
         try {
-            String sql = "SELECT S.Session_ID,G.[Group], R.Room, S.Date, SL.Start, SL.[End], L.Lecturer, SL.Slot_ID, SL.Slot FROM \n"
+            String sql = "SELECT S.Session_ID,G.[Group],ST.Name, R.Room, S.Date, SL.Start, SL.[End], L.Lecturer, SL.Slot_ID, SL.Slot FROM \n"
                     + "[Session] S INNER JOIN  [Group] G ON G.Group_ID = S.GroupID\n"
                     + "INNER JOIN Rom R ON S.Room_ID = R.Room_ID\n"
                     + "INNER JOIN Student_Group SG ON SG.Group_ID = G.Group_ID \n"
@@ -45,11 +46,13 @@ public class SesDBcontext extends DBcontext<Session>{
                 Group g = new Group();
                 Lecturer l = new Lecturer();
                 Slot sl = new Slot();
-                
+                Student st = new Student();
                 r.setRoomName(rs.getString("Room"));
                 s.setRoom(r);
-
+                
+                st.setName(rs.getString("Name"));
                 g.setGname(rs.getString("Group"));
+                g.setStudents(st);
                 s.setGroup(g);
 
                 l.setLname(rs.getString("Lecturer"));

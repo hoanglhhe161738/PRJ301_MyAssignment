@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/Home.jsp</file>
-            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/src/java/dal/AccountDBcontext.java</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/LectureAttendance.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/src/java/Lecturer/LecturerController.java</file>
             <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Student/AttandanceStatic.jsp</file>
-            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Home/Login.jsp</file>
-            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/src/java/model/Account.java</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/src/java/dal/LectureDBcontext.java</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/src/java/Student/GroupController.java</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/ListGroup.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Student/Sheme.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Student/ListGroup.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/Home.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/AttandanceStatic.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Student/Home.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Lecturer/LectureSheme.jsp</file>
+            <file>file:/D:/HE161738/Seaso4_he161738/PRJ301_he161738/MyFap/web/Fap/Student/Group.jsp</file>
         </group>
     </open-files>
 </project-private>

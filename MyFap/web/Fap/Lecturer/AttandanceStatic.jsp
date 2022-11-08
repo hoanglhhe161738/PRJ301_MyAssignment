@@ -131,7 +131,8 @@
         <div class="home">
             <ol style="padding-left: 10px;">
                 <li style="list-style: none;">
-                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
+                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"
+                                                      href="Fap/Lecturer/Home.jsp">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
                 </li>
             </ol>
             <div>
@@ -148,15 +149,15 @@
                     <thead>
                         <tr style="background-color: #6b90da;">
                             <td>CAMPUS/PROGRAM <br></td>
-
                             <td>COURSE</td>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${sessionScope.groupsStatic}" var="grs">
+                        <c:forEach items="${sessionScope.groupsStaticLecturer}" var="grs">
                             <tr>
                                 <td></td>
-                                <td><a href="/MyFap/StaticAttendanceController?id=${sessionScope.student.id}&gid=${grs.gid}">${grs.gname}</a></td>
+                                <td><a href="/MyFap/StaticAttendanceControllerLecturer?id=${grs.students.id}&gid=${grs.gid}">${grs.gname}_${grs.students.name}</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -191,6 +192,7 @@
                                 <td>${ses.lec.lname}</td>
                                 <td>${ses.group.gname}</td>
                                 <td>
+                                    
                                     <c:if test="${ses.att eq true}">Attended
                                         <c:set value="${attended+1}" var="attended" />
                                     </c:if>
@@ -212,12 +214,10 @@
                     </tbody>
                 </table>
                 <tr style="border:0.2px solid rgb(227, 219, 219);">
-                    Total: <c:out value="${attended + absent}"/> Slot ABSENT: <c:out value="${attended/(attended + absent)*100}" />%
+                    Total: <c:out value="${attended + absent}"/> Slot ABSENT: <c:out value="${absent/(attended + absent)*100}" />%
                 </tr>
             </div>
         </div>
-
-
     </body>
 
 </html>

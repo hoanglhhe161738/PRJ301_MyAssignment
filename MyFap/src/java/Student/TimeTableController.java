@@ -72,9 +72,9 @@ public class TimeTableController extends HttpServlet {
         int count = 0;
        
         for (Session session : sessions) {
-            Attendance a = new Attendance();
+            Attendance a = adb.Attendance(id, session.getSesId());
             a.setSessions(session);
-            boolean b = adb.Attendance(id, session.getSesId());
+            boolean b = a.isAttendance();
             a.setAttendance(b);
             list.add(a);      
             count ++;

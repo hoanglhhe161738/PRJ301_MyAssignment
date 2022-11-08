@@ -72,7 +72,7 @@
             }
             .attendance table tbody td{
                 height: 50px;
-                
+
             }
             .sheme td{
                 vertical-align: top;
@@ -131,91 +131,34 @@
         <div class="home">
             <ol style="padding-left: 10px;">
                 <li style="list-style: none;">
-                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"
-                                                      href="../Student.aspx">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
+                    <span id="ctl00_lblNavigation"><a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span>
                 </li>
             </ol>
             <div>
                 <a style="text-decoration: none;" href="?view=user">
-                    <span id="ctl00_lblLogIn" class="label label-success">hoanglhhe161738</span></a> | <a
-                    style="text-decoration: none;" href="?logout=true" class="label label-success">logout</a> |
+                    <span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.displayName}</span></a> | <a
+                    style="text-decoration: none;" href="/MyFap/LogoutController" class="label label-success">logout</a> |
                 <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
             </div>
         </div>
         <div class="menu">
             <div class="sheme">
-                <select name="" id="">
-                    <option value="Sheme.html"><a href="Sheme.html">Student 1</a></option>
-                    <option value="Student 2"><a href="">Student 2</a></option>
-                    <option value="Student 2"><a href="">Student 3</a></option>
-                    <option value="Student 2"><a href="">Student 4</a></option>
-                    <option value="Student 2"><a href="">Student 5</a></option>
-                </select>
-                <input type="submit" value="view">
+
                 <table>
                     <thead>
                         <tr style="background-color: #6b90da;">
                             <td>CAMPUS/PROGRAM <br></td>
-                            <td>TERM</td>
+
                             <td>COURSE</td>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr>
-                            <td>FU-HL</td>
-                            <td>
-                                <a href="">Summer2017</a><br>
-                                <a href="">Fall2017</a><br>
-                            </td>
-                            <td><a href=""> Statistics and Probability(MAS291)(SE1643,start 05/09/2022)</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="">Spring2018</a><br>
-                                <a href="">Summer2018</a><br>
-                                <a href="">Fall2018</a><br>
-                            </td>
-                            <td> <a href="">Java Web Application Development(PRJ301)(SE1643,start 05/09/2022)</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="">Spring2019</a><br>
-                                <a href="">Summer2019</a><br>
-                                <a href="">Fall2019</a><br>
-                            </td>
-                            <td> <a href=""> Elementary Japanese 1-A1.2(JPD123)(SE1643,start 06/09/2022)</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="">Spring2020</a><br>
-                                <a href="">Summer2020</a><br>
-                                <a href="">Fall2020</a><br>
-                            </td>
-                            <td> <a href="">Introduction to Software Engineering(SWE201c)(SE1639,start 17/09/2022)</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="">Spring2021</a><br>
-                                <a href="">Summer2021</a><br>
-                                <a href="">Fall2021</a><br>
-                            </td>
-
-                            <td> <a href="">Internet of Things(IOT102)(SE1643,start 10/10/2022)</a></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="">Spring2022</a><br>
-                                <a href="">Summer2022</a><br>
-                                <a href="">Fall2022</a>
-                            </td>
-                        </tr>
-
+                        <c:forEach items="${sessionScope.groupsStatic}" var="grs">
+                            <tr>
+                                <td></td>
+                                <td><a href="/MyFap/StaticAttendanceController?id=${sessionScope.student.id}&gid=${grs.gid}">${grs.gname}</a></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -256,8 +199,14 @@
                                     </c:if>
                                     <c:if test="${ses.att eq false and helper.compareDate(ses.date) ne -1}">-</c:if>
                                     </td>
-                                    <td></td>
-                                </tr>
+                                    <td>
+                                    <c:forEach items="${sessionScope.Attandance}" var="a">
+                                        <c:if test="${ses.sesId eq a.sessions.sesId}">
+                                            ${a.description}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                            </tr>
                         </c:forEach>
 
                     </tbody>
@@ -268,7 +217,7 @@
             </div>
         </div>
 
-        
+
     </body>
 
 </html>

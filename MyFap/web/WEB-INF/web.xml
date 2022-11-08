@@ -36,6 +36,38 @@
         <servlet-name>GroupControllerList</servlet-name>
         <servlet-class>Student.GroupControllerList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaticGroupController</servlet-name>
+        <servlet-class>Student.StaticGroupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupControllerListLecturer</servlet-name>
+        <servlet-class>Lecturer.GroupControllerListLecturer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaticGroupControllerLecturer</servlet-name>
+        <servlet-class>Lecturer.StaticGroupControllerLecturer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaticAttendanceControllerLecturer</servlet-name>
+        <servlet-class>Lecturer.StaticAttendanceControllerLecturer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShemeConttroller</servlet-name>
+        <servlet-class>Student.ShemeConttroller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LecturerShemeController</servlet-name>
+        <servlet-class>Lecturer.LecturerShemeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupControllerAtt</servlet-name>
+        <servlet-class>Student.GroupControllerAtt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TimeTableController</servlet-name>
         <url-pattern>/TimeTableController</url-pattern>
@@ -71,6 +103,38 @@
     <servlet-mapping>
         <servlet-name>GroupControllerList</servlet-name>
         <url-pattern>/GroupControllerList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaticGroupController</servlet-name>
+        <url-pattern>/StaticGroupController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupControllerListLecturer</servlet-name>
+        <url-pattern>/GroupControllerListLecturer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaticGroupControllerLecturer</servlet-name>
+        <url-pattern>/StaticGroupControllerLecturer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaticAttendanceControllerLecturer</servlet-name>
+        <url-pattern>/StaticAttendanceControllerLecturer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShemeConttroller</servlet-name>
+        <url-pattern>/ShemeConttroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LecturerShemeController</servlet-name>
+        <url-pattern>/LecturerShemeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupControllerAtt</servlet-name>
+        <url-pattern>/GroupControllerAtt</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

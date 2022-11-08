@@ -36,47 +36,50 @@
           margin-left: 10%;">
         <h2>Single activity Attendance</h2>
         <p>Attendance for PRJ291 with lecturer Sonnt5 at slot 1 on Wednesday 12/10/2022 Spring2022 in room BE-301 at FUHL</p>
-        <table>
-            <thead>
-                <tr style="background-color: #6b90da;">
-                    <td>No</td>
-                    <td>Group</td>
-                    <td>Code</td>
-                    <td>Name</td>
-                    <td>Image</td>
-                    <td>Status</td>
-                    <td>Comment</td>
-                    <td>Taker</td>
-                    <td>Record Time</td>
-                </tr>
-            </thead>
-             <c:set value="0" var="count" />
-            <c:forEach items="${sessionScope.listStudent}" var="lst">
-                 <c:set value="${count+1}" var="count" />
-                <tr style="border-bottom: 2px solid black;">
+        <form action="/MyFap/GroupController" method="post">
+            <table>
+                <thead>
+                    <tr style="background-color: #6b90da;">
+                        <td>No</td>
+                        <td>Group</td>
+                        <td>Code</td>
+                        <td>Name</td>
+                        <td>Image</td>
+                        <td>Status</td>
+                        <td>Comment</td>
+                        <td>Taker</td>
+                        <td>Record Time</td>
+                    </tr>
+                </thead>     
+                <c:set value="0" var="count" />
+                <c:forEach items="${sessionScope.listStudent}" var="lst">
+                    <c:set value="${count+1}" var="count" />
+                    <tr style="border-bottom: 2px solid black;">
+                        <td><c:out value="${count}"/></td>
+                        <td>${lst.sessions.group.gname}</td>
+                        <td>${lst.students.id}</td>
+                        <td>${lst.students.name}</td>
+                        <td><img style="width: 90px;
+                                 height: 120px; "src="https://i.pinimg.com/originals/42/9b/17/429b171accad8b42f906e43b35c3b341.jpg" alt=""></td>                   
+                        <td style="font-size: 10px;">Present<input  style="font-size: 1px;" type="radio"
+                                                                    <c:if test="${lst.attendance}">
+                                                                        checked="checked"
+                                                                    </c:if>name="${lst.students.name}" value="1">
+                            absent<input type="radio" 
+                                         <c:if test="${lst.attendance}">
+                                             checked="checked"
+                                         </c:if>name="${lst.students.name}" value="0"><input type="hidden" value="lst.students.id">                        
+                        </td>                    
+                        </td>
+                        <td><input type="text" name="${lst.students.id}" value="${lst.description}"></td>
+                        <td>${lst.sessions.lec.lname}</td>
+                        <td>${lst.recordTime}</td>
+                    </tr>
+                </c:forEach>
+                <input type="submit" value="save">
 
-
-
-                    <td><c:out value="${count}"/></td>
-                    <td>${lst.sessions.group.gname}</td>
-                    <td>${lst.students.id}</td>
-                    <td>${lst.students.name}</td>
-                    <td><img style="width: 90px;
-                             height: 120px; "src="https://i.pinimg.com/originals/42/9b/17/429b171accad8b42f906e43b35c3b341.jpg" alt=""></td>
-                    <td style="font-size: 10px;">
-                    <td style="font-size: 10px;">Present<input  style="font-size: 1px;" type="radio" name="${lst.students.name}" value="1">
-                        absent<input type="radio" name="${lst.students.name}" value="0">
-                        <input type="submit" value="save">
-                    </td>
-                    </td>
-                    <td>${lst.description}</td>
-                    <td>${lst.sessions.lec.lname}</td>
-                    <td>${lst.recordTime}</td>
-
-
-
-                </tr>
-            </c:forEach>
-        </table>
+            </table>
+        </form>
+        <a style="text-decoration: none;"href="Fap/Lecturer/Home.jsp">Home</a>
     </body>
 </html>

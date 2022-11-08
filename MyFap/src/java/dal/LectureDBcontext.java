@@ -30,8 +30,7 @@ public class LectureDBcontext extends DBcontext<Lecturer> {
             String sql = "SELECT S.Session_ID,G.[Group], R.Room, S.Date, SL.Start, SL.[End], L.Lecturer_ID ,L.Lecturer, SL.Slot_ID FROM \n"
                     + "                   [Session] S INNER JOIN  [Group] G ON G.Group_ID = S.GroupID\n"
                     + "                    INNER JOIN Rom R ON S.Room_ID = R.Room_ID\n"
-                    + "                    INNER JOIN Student_Group SG ON SG.Group_ID = G.Group_ID \n"
-                    + "                    INNER JOIN Student ST ON ST.Student_ID = SG.Student_ID \n"
+                                      
                     + "                    INNER JOIN Slot SL ON SL.Slot_ID = S.Slot_ID\n"
                     + "		           Inner JOIN Lecturer L ON L.Lecturer_ID = S.Lid\n"
                     + "                    WHERE L.Lecturer_ID = ?\n"
@@ -70,18 +69,6 @@ public class LectureDBcontext extends DBcontext<Lecturer> {
 
                 sessions.add(s);
             }
-//            String spl = "SELECT TOP (1000) [Room_ID]\n"
-//                    + "      ,[Room]\n"
-//                    + "  FROM [SE1643_PRJ301].[dbo].[Rom]";
-//            PreparedStatement stm = connection.prepareStatement(spl);
-//            ResultSet rs = stm.executeQuery();
-//            while(rs.next()){
-//                Room r = new Room();
-//                r.setRoomId(rs.getInt("Room_ID"));
-//               // r.setRoomName(rs.getString("Room"));
-//                sessions.add(r);
-//            }
-
         } catch (SQLException ex) {
             Logger.getLogger(SessionDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         }

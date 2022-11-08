@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Group;
+import model.Lecturer;
 import model.Student;
 
 /**
@@ -49,6 +50,35 @@ public class GroupDBcontext extends DBcontext<Group> {
         return null;
     }
 
+    public ArrayList<Group> getListGroupLecturer(int stid) {
+        ArrayList<Group> groups = new ArrayList<>();
+        try {
+            String sql = "SELECT G.Group_ID ,G.[Group], S.Name, s.Student_ID FROM [Group] G \n"
+                    + "                    INNER JOIN Student_Group SG ON SG.Group_ID = G.Group_ID\n"
+                    + "                    INNER JOIN Lecturer L ON L.Lecturer_ID = G.Lecturer_ID\n"
+                    + "                    INNER JOIN Student S ON SG.Student_ID = S.Student_ID\n"
+                    + "                    WHERE L.Lecturer_ID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, stid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                Lecturer l = new Lecturer();
+                Student s = new Student();
+                s.setName(rs.getString("Name"));
+                s.setId(rs.getInt("Student_ID"));
+                g.setGname(rs.getString("Group"));
+                g.setGid(rs.getInt("Group_ID"));
+                g.setStudents(s);
+                groups.add(g);
+            }
+            return groups;
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBcontext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<Student> getListStudent(int gid) {
         ArrayList<Student> list = new ArrayList<>();
         try {
@@ -60,7 +90,7 @@ public class GroupDBcontext extends DBcontext<Group> {
             stm.setInt(1, gid);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                
+
                 Student s = new Student();
 
                 s.setId(rs.getInt("Student_ID"));
@@ -83,7 +113,6 @@ public class GroupDBcontext extends DBcontext<Group> {
 
     @Override
     public void update(Group model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

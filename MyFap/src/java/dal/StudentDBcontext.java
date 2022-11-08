@@ -48,6 +48,7 @@ public class StudentDBcontext extends DBcontext<Student> {
                 g.setGname(rs.getString("Group"));
                 s.setGroup(g);
                 s.setLec(l);
+                s.setSesId(rs.getInt("Session_ID"));
                 a.setSessions(s);
                 
                 st.setId(rs.getInt("Student_ID"));

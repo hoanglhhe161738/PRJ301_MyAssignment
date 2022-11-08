@@ -114,7 +114,7 @@
     <body>
         <div class="login-page">
             <div class="form">
-                <form class="login-form" action="/MyFap/ViewController" method="">
+                <form class="login-form" action="/MyFap/ViewController" method="post">
                     <input type="text" name="username" placeholder="Username"/>
                     <input type="password" name="password" placeholder="Password"/>
                     <input type="submit" class="button" value="Login">

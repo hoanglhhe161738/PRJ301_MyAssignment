@@ -129,13 +129,13 @@
                    background-color:#5cb85c;
                    color: white;" href="?view=user">
                     <span id="ctl00_lblLogIn" class="label label-success">${sessionScope.account.displayName}</span></a> | <a
-                    style="text-decoration: none;" href="?logout=true" class="label label-success">logout</a> 
+                    style="text-decoration: none;" href="/MyFap/LogoutController" class="label label-success">logout</a> 
             </div>
         </div>
         <div class="view-home">
             <div class="view-home-item"><p>Group</p><a href="/MyFap/GroupControllerList?id=${sessionScope.student.id}"><img src="https://www.wellesleyfreelibrary.org/wp-content/uploads/2019/04/multiple-users-silhouette.png" alt=""></a></div>
-            <div class="view-home-item"><p>Timetable</p><a href="Fap/Student/Sheme.jsp?id=${sessionScope.student.id}"><img src="https://i.pinimg.com/originals/26/96/c9/2696c9403dd3d762a0cd2934490eccbb.jpg" alt=""></a></div>
-            <div class="view-home-item"><p>Attendance</p><a href=""><img style="height: 270.17px; width: 100%;" src="https://inkythuatso.com/uploads/images/2021/12/dau-tich-vector-inkythuatso-3-28-13-48-01.jpg" alt=""></a></div>
+            <div class="view-home-item"><p>Timetable</p><a href="/MyFap/ShemeConttroller?id=${sessionScope.student.id}"><img src="https://i.pinimg.com/originals/26/96/c9/2696c9403dd3d762a0cd2934490eccbb.jpg" alt=""></a></div>
+            <div class="view-home-item"><p>Attendance</p><a href="/MyFap/StaticGroupController?id=${sessionScope.student.id}"><img style="height: 270.17px; width: 100%;" src="https://inkythuatso.com/uploads/images/2021/12/dau-tich-vector-inkythuatso-3-28-13-48-01.jpg" alt=""></a></div>
         </div>
 
     </body>

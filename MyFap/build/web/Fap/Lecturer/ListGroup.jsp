@@ -13,10 +13,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="/MyFap/GroupControllerList" method="post">
+        <form action="/MyFap/GroupControllerListLecturer" method="post">
         
             <select name="gr">
-                <c:forEach  items="${sessionScope.groups}" var="g">
+                <c:forEach  items="${sessionScope.groupsLecturer}" var="g">
                 <option value="${g.gname}">${g.gname}</option>
             </c:forEach>
         </select>
@@ -29,6 +29,7 @@
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Date Of Birth</th>
+                    <th>Attendance</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,10 +39,12 @@
                         <td>${st.name}</td>
                         <td>${st.gender}</td>
                         <td>${st.dob}</td>
+                        <td><a><a href="">Take attendance</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
+            
         </table>
-<a style="text-decoration: none;"href="Fap/Student/Home.jsp">Home</a>
+        <a style="text-decoration: none;"href="Fap/Lecturer/Home.jsp">Home</a>
     </body>
 </html>

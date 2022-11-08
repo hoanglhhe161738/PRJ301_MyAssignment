@@ -4,8 +4,7 @@
  */
 package Student;
 
-import dal.AttendanceDBcontext;
-import dal.StudentDBcontext;
+import dal.GroupDBcontext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,14 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import model.Attendance;
 
+import model.Group;
 
 /**
  *
  * @author Hoàng
  */
-public class GroupController extends HttpServlet {
+public class StaticGroupController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +32,11 @@ public class GroupController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int sesid = Integer.parseInt(request.getParameter("sesid"));
-        StudentDBcontext sdb = new StudentDBcontext();
-        ArrayList<Attendance> listStudent = sdb.getListStudent(sesid);
-        
-        request.getSession().setAttribute("listStudent", listStudent);
-        
-        request.getRequestDispatcher("/Fap/Student/Group.jsp").forward(request, response);
+        int stid = Integer.parseInt(request.getParameter("id"));
+        GroupDBcontext gdb = new GroupDBcontext();
+        ArrayList<Group> groups = gdb.getListGroup(stid);
+        request.getSession().setAttribute("groupsStatic", groups);
+        request.getRequestDispatcher("/Fap/Student/AttandanceStatic.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,25 +65,7 @@ public class GroupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AttendanceDBcontext adb = new AttendanceDBcontext();
-        
-        ArrayList<Attendance> listStudent = (ArrayList<Attendance>) request.getSession().getAttribute("listStudent");
-        for (Attendance attendance : listStudent) {
-            int stid = attendance.getStudents().getId();
-            int sesid = attendance.getSessions().getSesId();
-            
-            String name = attendance.getStudents().getName();
-            String id = String.valueOf(attendance.getStudents().getId());
-            String comment = request.getParameter(id);
-            String a = request.getParameter(name);
-            boolean b = false;
-            if(a.equals("1")){
-                b = true;
-            }
-            
-            adb.update(attendance, sesid, stid, b, comment);
-        }
-        response.sendRedirect("/MyFap/Fap/Lecturer/Home.jsp");
+        processRequest(request, response);
     }
 
     /**

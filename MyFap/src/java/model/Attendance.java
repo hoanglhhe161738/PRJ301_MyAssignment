@@ -38,8 +38,6 @@ public class Attendance {
         this.students = students;
     }
 
-   
-
     public boolean isAttendance() {
         return attendance;
     }
