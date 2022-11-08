@@ -144,16 +144,13 @@
             <thead>
                 <tr style="background-color: #6b90da;">
                     <td>YEAR: <Select>
-                            <option value="">2022</option>
-                            <option value="">2021</option>
-                        </Select></td>
-                    <td>MON</td>
-                    <td>TUE</td>
-                    <td>WED</td>
-                    <td>THU</td>
-                    <td>FRI</td>
-                    <td>SAT</td>
-                    <td>SUN</td>
+                        <option value="">2022</option>
+
+                    </Select></td>
+                    <c:forEach items="${sessionScope.dates}" var="d">
+                    <td style="border-bottom:0.2px solid rgb(227, 219, 219);
+                        border-left:0.2px solid rgb(227, 219, 219);">${helper.getDayNameofWeek(d)}</td>
+                </c:forEach>
                 </tr>
             </thead>
             <tbody>
@@ -223,11 +220,11 @@
 <p style="font-weight: bold;">More note / Chú thích thêm:</p>
 
 <ul>
-    <li><label style="color: rgb(0, 128, 0);" for="">(attended):</label> HoangLHHE161738 had attended this
-        activity / Lý H?i Hoàng ?ã tham gia ho?t ??ng này</li>
-    <li><label style="color: rgb(255, 0, 0);" for=""> (absent): </label> HoangLHHE161738 had NOT attended this
-        activity / Lý H?i Hoàng ?ã v?ng m?t bu?i này</li>
-    <li>(-): no data was given / ch?a có d? li?u</li>
+    <li><label style="color: rgb(0, 128, 0);" for="">(attended):</label> ${sessionScope.account.displayName} had attended this
+        activity / ${sessionScope.account.displayName} đã tham gia buổi học này</li>
+    <li><label style="color: rgb(255, 0, 0);" for=""> (absent): </label> ${sessionScope.account.displayName} had NOT attended this
+        activity / ${sessionScope.account.displayName} đã vắng mặt buổi này</li>
+    <li>(-): no data was given /chưa có dữ liệu</li>
 </ul>
 <div class="end">
     <p class="end-one" style="margin-top: 100px;"> <label style="font-weight:bold ;" for="">M?i góp ý, th?c m?c xin liên h?:</label>
