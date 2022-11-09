@@ -29,7 +29,7 @@
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Date Of Birth</th>
-                    <th>Attendance</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@
                         <td>${st.name}</td>
                         <td>${st.gender}</td>
                         <td>${st.dob}</td>
-                        <td><a><a href="">Take attendance</a></td>
+                        
                     </tr>
                 </c:forEach>
             </tbody>
